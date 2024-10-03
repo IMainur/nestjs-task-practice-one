@@ -3,17 +3,24 @@ import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { TransformInterceptor } from './transform.interceptor';
 
+// console.log(process.env)
+console.log(process.env.JWT_SECRET_KEY)
+console.log(process.env.NODE)
+
 async function bootstrap() {
+  const logger = new Logger();
   const app = await NestFactory.create(AppModule);
-  const port = 4343;
+  const port = process.env.PORT;
   const globalPrefix = 'api/v1';
   app.setGlobalPrefix(globalPrefix)
   app.useGlobalInterceptors(new TransformInterceptor())
+  app.enableCors()
 
   app.useGlobalPipes(new ValidationPipe())
   await app.listen(port);
-  Logger.log(
+  logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`,
   );
+  
 }
 bootstrap();

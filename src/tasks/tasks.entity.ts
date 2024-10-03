@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ETaskStatus } from "./tasks.constants";
-import { User } from "src/auth/user.entity";
+import { User } from "../auth/user.entity";
 import { Exclude } from "class-transformer";
 
 // data mapper [approach] 🔽
