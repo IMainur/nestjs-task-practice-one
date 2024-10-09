@@ -13,10 +13,10 @@ async function bootstrap() {
   const port = process.env.PORT;
   const globalPrefix = 'api/v1';
   app.setGlobalPrefix(globalPrefix)
+  app.useGlobalPipes(new ValidationPipe())
   app.useGlobalInterceptors(new TransformInterceptor())
   app.enableCors()
 
-  app.useGlobalPipes(new ValidationPipe())
   await app.listen(port);
   logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`,
